@@ -60,7 +60,7 @@ var MODEL_TO_ENCODING = map[string]string{
 	"text-search-babbage-doc-001":  MODEL_R50K_BASE,
 	"text-search-ada-doc-001":      MODEL_R50K_BASE,
 	"code-search-babbage-code-001": MODEL_R50K_BASE,
-	"code-search-ada-code-001":     MODEL_R50K_BASE,
+	"code-search-ada-code-001":     MODEL_R50K_BAS
 	// open source
 	"gpt2": "gpt2",
 }
@@ -82,7 +82,7 @@ func init() {
 
 type Encoding struct {
 	Name           string
-	PatStr         string
+	Pa       int
 	MergeableRanks map[string]int
 	SpecialTokens  map[string]int
 	ExplicitNVocab int
