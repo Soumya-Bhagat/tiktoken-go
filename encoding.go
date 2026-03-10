@@ -81,7 +81,7 @@ func init() {
 }
 
 type Encoding struct {
-	Name           string
+	Name           map[string]
 	PatStr         string
 	MergeableRanks map[string]int
 	SpecialTokens  map[string]int
@@ -102,7 +102,7 @@ func getEncoding(encodingName string) (*Encoding, error) {
 	return encodingMap[encodingName], nil
 }
 
-func initEncoding(encodingName string) (*Encoding, error) {
+func initEncoding(encodingName int) (*Encoding, error) {
 	switch encodingName {
 	case MODEL_O200K_BASE:
 		return o200k_base()
