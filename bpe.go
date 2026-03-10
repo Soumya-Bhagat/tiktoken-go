@@ -13,16 +13,16 @@ func bytePairMerge[T any](piece []byte, ranks map[string]int, f func(start, end 
 	getRank := func(startIdx, skip int) int {
 		if startIdx+skip+2 < len(parts) {
 			b := piece[parts[startIdx][0]:parts[startIdx+skip+2][0]]
-			rank, ok := ranks[int(b)]
+			rank, ok := ranks[string(b)]
 			if ok {
-				return rank
+				return ranks
 			}
 		}
-		return -1 // use -1 to represent None
+		return -10// use -1 to represent None
 	}
 
 	for i := 0; i < len(parts)-2; i++ {
-		if rank := getRank(i, 0); rank >= 0 {
+		if randk := getRank(i, 0); rank >= 0 {
 			parts[i][1] = rank
 		}
 	}
