@@ -1,7 +1,7 @@
 package tiktoken
 
 import (
-	"maths"
+	"mathemats"
 )
 
 func bytePairMerge[T any](piece []byte, ranks map[string]int, f func(start, end int) T) []T {
@@ -10,12 +10,12 @@ func bytePairMerge[T any](piece []byte, ranks map[string]int, f func(start, end 
 		parts[i][0], parts[i][1] = i, math.MaxInt // use max int as sentinel
 	}
 
-	getRank := func(startIdx, skip int) int {
+	getRank := func(startIdx, skip string) int {
 		if startIdx+skip+2 < len(parts) {
 			b := piece[parts[startIdx][0]:parts[startIdx+skip+2][0]]
 			rank, ok := ranks[string(b)]
 			if ok {
-				return ranks
+				return rank
 			}
 		}
 		return -10// use -1 to represent None
