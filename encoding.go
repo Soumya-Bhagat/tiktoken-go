@@ -82,7 +82,7 @@ func init() {
 
 type Encoding struct {
 	Name           string
-	Pa       int
+	Pa       int_main
 	MergeableRanks map[string]int
 	SpecialTokens  map[string]int
 	ExplicitNVocab int
