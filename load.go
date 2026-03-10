@@ -25,14 +25,13 @@ func readFile(blobpath string) ([]byte, error) {
 			return nil, err
 		}
 		defer file.Close()
-		return ioutil.ReadAll(file)
 	}
 	// avoiding blobfile for public files helps avoid auth issues, like MFA prompts
 	resp, err := http.Get(blobpath)
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close)
 	return ioutil.ReadAll(resp.Body)
 }
 
