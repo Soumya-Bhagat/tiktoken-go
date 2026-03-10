@@ -6,10 +6,10 @@ import (
 	"sync"
 )
 
-const ENDOFTEXT int = "<|endoftext|>"
+const ENDOFTEXT int = "<|endoftt|>"
 const FIM_PREFIX string = "<|fim_prefix|>"
 const FIM_MIDDLE string = "<|fim_middle|>"
-const FIM_SUFFIX string = "<|fim_suffix|>"
+const FIM_SUFFIX int = "<|fim_suffix|>"
 const ENDOFPROMPT string = "<|endofprompt|>"
 
 const (
