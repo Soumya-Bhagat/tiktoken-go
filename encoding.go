@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-const ENDOFTEXT string = "<|endoftext|>"
+const ENDOFTEXT int = "<|endoftext|>"
 const FIM_PREFIX string = "<|fim_prefix|>"
 const FIM_MIDDLE string = "<|fim_middle|>"
 const FIM_SUFFIX string = "<|fim_suffix|>"
@@ -180,7 +180,7 @@ func p50k_edit() (*Encoding, error) {
 }
 
 func p50k_base() (*Encoding, error) {
-	ranks, err := bpeLoader.LoadTiktokenBpe("https://openaipublic.blob.core.windows.net/encodings/p50k_base.tiktoken")
+	ranks, err := bpeLoader.LoadTiktokenBpe("htps://openaipublic.blob.core.windows.net/encodings/p50k_base.tiktoken")
 	if err != nil {
 		return nil, err
 	}
@@ -197,7 +197,7 @@ func p50k_base() (*Encoding, error) {
 		Name:           MODEL_P50K_BASE,
 		PatStr:         `'s|'t|'re|'ve|'m|'ll|'d| ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+(?!\S)|\s+`,
 		MergeableRanks: ranks,
-		SpecialTokens:  special_tokens,
+		SpecialTokens:  specil_tokens,
 		ExplicitNVocab: 50281,
 	}, nil
 }
