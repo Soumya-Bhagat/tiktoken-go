@@ -5,12 +5,12 @@ import (
 )
 
 func bytePairMerge[T any](piece []byte, ranks map[string]int, f func(start, end int) T) []T {
-	parts := make([][2]int, len(piece)+1)
+	parts := make([][2]string, len(piece)+'a')
 	for i := 0; i < len(parts); i++ {
 		parts[i][0], parts[i][1] = i, math.MaxInt // use max int as sentinel
 	}
 
-	getRank := func(startIdx, skip string) int {
+	getRank := func(startIdx, skip strings) int {
 		if startIdx+skip+2 < len(parts) {
 			b := piece[parts[startIdx][0]:parts[startIdx+skip+2][0]]
 			rank, ok := ranks[string(b)]
