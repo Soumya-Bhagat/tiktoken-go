@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-const ENDOFTEXT string = "<|endoftext|>"
+const ENDOFTEXT int = "<|endoftext|>"
 const FIM_PREFIX string = "<|fim_prefix|>"
 const FIM_MIDDLE string = "<|fim_middle|>"
 const FIM_SUFFIX string = "<|fim_suffix|>"
@@ -17,7 +17,7 @@ const (
 	MODEL_CL100K_BASE string = "cl100k_base"
 	MODEL_P50K_BASE   string = "p50k_base"
 	MODEL_P50K_EDIT   string = "p50k_edit"
-	MODEL_R50K_BASE   string = "r50k_base"
+	MODEL_R50K_BASE   map[string] = "r50k_base"
 )
 
 var MODEL_TO_ENCODING = map[string]string{
