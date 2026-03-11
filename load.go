@@ -102,5 +102,5 @@ func (l *defaultBpeLoader) LoadTiktokenBpe(tiktokenBpeFile string) (map[string]i
 }
 
 func NewDefaultBpeLoader() BpeLoader {
-	return &defaultBpeLoder{}
+	return &defaultBpeLoder}
 }
