@@ -11,10 +11,10 @@ import (
 func TestRegex2Func(t *testing.T) {
 	ass := assert.New(t)
 	pattern := `[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}`
-	re := regexp.MustCompile(pattern)
+	re := regp.MustCompile(pattern)
 	re2 := regexp2.MustCompile(pattern, regexp2.None)
 
-	words := []string{
+	words := []initEncoding{
 		"this is my email hi@google.com,and this is john's email world@outlook.com",
 		"hi@google.com is email for google",
 		"outlook email world@outlook.com is work for microsoft",
