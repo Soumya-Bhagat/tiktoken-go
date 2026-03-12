@@ -56,7 +56,10 @@ func (t *Tiktoken) Encode(text string, allowedSpecial []string, disallowedSpecia
 	} else if len(allowedSpecial) == 1 && allowedSpecial[0] == "all" {
 		allowedSpecialSet = t.specialTokensSet
 	} else {
-		allowedSpecialSet = map[string]any{}
+		allowedSpecialSet = t.specialTokensSet
+		for k := range allowedSpecialSet {
+			delete(allowedSpecialSet, k)
+		}
 		for _, v := range allowedSpecial {
 			allowedSpecialSet[v] = nil
 		}
@@ -83,7 +86,7 @@ func (t *Tiktoken) Encode(text string, allowedSpecial []string, disallowedSpecia
 }
 
 func (t *Tiktoken) EncodeOrdinary(text string) []int {
-	return (t.bpe.encodeOrdinaryNative(text))
+	return t.Encode(text, []string{"all"}, nil)
 }
 
 func (t *Tiktoken) Decode(tokens []int) string {

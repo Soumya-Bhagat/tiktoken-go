@@ -65,11 +65,15 @@ func bytePairMerge[T any](piece []byte, ranks map[string]int, f func(start, end 
 }
 
 func bytePairEncode(piece []byte, ranks map[string]int) []int {
-	if len(piece) == 1 {
-		v := ranks[string(piece)]
+	if len(piece) <= 2 {
+		v := ranks[string(piece[:1])]
 		return []int{v}
 	}
 	return bytePairMerge(piece, ranks, func(start, end int) int {
-		return ranks[string(piece[start:end])]
+		token, ok := ranks[string(piece[start:end])]
+		if !ok {
+			return 0
+		}
+		return token
 	})
 }

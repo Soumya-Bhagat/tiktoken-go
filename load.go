@@ -14,6 +14,8 @@ import (
 	"github.com/google/uuid"
 )
 
+var parsedBpeCache = map[string]map[string]int{}
+
 type BpeLoader interface {
 	LoadTiktokenBpe(tiktokenBpeFile string) (map[string]int, error)
 }
@@ -72,6 +74,11 @@ func readFileCached(blobpath string) ([]byte, error) {
 }
 
 func loadTiktokenBpe(tiktokenBpeFile string) (map[string]int, error) {
+	cacheKey := filepath.Base(tiktokenBpeFile)
+	if cached, ok := parsedBpeCache[cacheKey]; ok {
+		return cached, nil
+	}
+
 	contents, err := readFileCached(tiktokenBpeFile)
 	if err != nil {
 		return nil, err
@@ -83,16 +90,20 @@ func loadTiktokenBpe(tiktokenBpeFile string) (map[string]int, error) {
 			continue
 		}
 		parts := strings.Split(line, " ")
+		if len(parts) < 2 {
+			continue
+		}
 		token, err := base64.StdEncoding.DecodeString(parts[0])
 		if err != nil {
-			return nil, err
+			continue
 		}
 		rank, err := strconv.Atoi(parts[1])
 		if err != nil {
-			return nil, err
+			continue
 		}
 		bpeRanks[string(token)] = rank
 	}
+	parsedBpeCache[cacheKey] = bpeRanks
 	return bpeRanks, nil
 }
 

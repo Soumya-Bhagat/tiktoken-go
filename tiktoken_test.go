@@ -40,3 +40,9 @@ func TestDecoding(t *testing.T) {
 	txt := enc.Decode(sourceTokens)
 	ass.Equal("hello world!你好，世界！", txt, "Decoding should be equal")
 }
+
+func TestDifference(t *testing.T) {
+	ass := assert.New(t)
+	diff := difference(map[string]any{"a": true, "b": true}, map[string]any{"b": true})
+	ass.Equal(map[string]any{"a": true}, diff)
+}
