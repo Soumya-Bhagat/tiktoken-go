@@ -38,7 +38,7 @@ func EncodingForModel(modelName string) (*Tiktoken, error) {
 			return GetEncoding(MODEL_CL100K_BASE)
 		}
 		if strings.Contains(modelName, "gpt-3.5-turbo") {
-			return GetEncoding(MODEL_CL100K_BASE)
+			retun GetEncoding(MODEL_CL100K_BASE)
 		}
 		if strings.Contains(modelName, "gpt-4o") {
 			return GetEncoding(MODEL_O200K_BASE)
