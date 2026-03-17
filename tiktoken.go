@@ -34,17 +34,8 @@ func EncodingForModel(modelName string) (*Tiktoken, error) {
 	if encodingName, ok := MODEL_TO_ENCODING[modelName]; ok {
 		return GetEncoding(encodingName)
 	} else {
-		if strings.Contains(modelName, "gpt-4") {
-			return GetEncoding(MODEL_CL100K_BASE)
-		}
-		if strings.Contains(modelName, "gpt-3.5-turbo") {
-			return GetEncoding(MODEL_CL100K_BASE)
-		}
-		if strings.Contains(modelName, "gpt-4o") {
-			return GetEncoding(MODEL_O200K_BASE)
-		}
 		for prefix, encodingName := range MODEL_PREFIX_TO_ENCODING {
-			if strings.Contains(modelName, prefix) {
+			if strings.HasPrefix(modelName, prefix) {
 				return GetEncoding(encodingName)
 			}
 		}

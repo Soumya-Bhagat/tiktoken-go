@@ -31,13 +31,6 @@ func TestEncoding(t *testing.T) {
 	})
 }
 
-func TestEncodingForModelUnknownVariant(t *testing.T) {
-	ass := assert.New(t)
-	enc, err := EncodingForModel("my-gpt-3.5-turbo-preview")
-	ass.Nil(err, "Encoding init should not be nil")
-	ass.NotNil(enc, "Encoding should not be nil")
-}
-
 func TestDecoding(t *testing.T) {
 	ass := assert.New(t)
 	// enc, err := GetEncoding("cl100k_base")
