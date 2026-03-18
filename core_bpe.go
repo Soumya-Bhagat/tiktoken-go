@@ -129,9 +129,8 @@ func (bp *CoreBPE) encodeNative(text string, allowedSpecial map[string]any) ([]i
 
 func (bp *CoreBPE) encodeOrdinaryNative(text string) []int {
 	ret := []int{}
-	textRunes := []rune(text)
 	for _, mat := range findRegex2AllStringMatchIndex(text, bp.tlRegex) {
-		piece := cutRunes(textRunes, mat[0], mat[1])
+		piece := text[mat[0]:mat[1]]
 		if token, ok := bp.encoder[piece]; ok {
 			ret = append(ret, token)
 			continue
@@ -149,9 +148,7 @@ func (bpe *CoreBPE) decodeNative(tokens []int) []byte {
 		if !ok {
 			tokenBytes = bpe.specialTokensDecoder[token]
 		}
-		if len(tokenBytes) > 0 {
-			ret = append(ret, tokenBytes...)
-		}
+		ret = append(ret, tokenBytes...)
 	}
 	return ret
 }
