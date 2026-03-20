@@ -38,6 +38,13 @@ func TestEncodingForModelUnknownVariant(t *testing.T) {
 	ass.NotNil(enc, "Encoding should not be nil")
 }
 
+func TestEncodeOrdinary(t *testing.T) {
+	ass := assert.New(t)
+	enc, err := EncodingForModel("gpt-3.5-turbo")
+	ass.Nil(err, "Encoding init should not be nil")
+	ass.NotEmpty(enc.EncodeOrdinary("plain text"))
+}
+
 func TestDecoding(t *testing.T) {
 	ass := assert.New(t)
 	// enc, err := GetEncoding("cl100k_base")
