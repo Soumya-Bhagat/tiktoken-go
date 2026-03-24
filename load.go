@@ -18,21 +18,20 @@ type BpeLoader interface {
 	LoadTiktokenBpe(tiktokenBpeFile string) (map[string]int, error)
 }
 
-func readFile(blobpath string) ([]byte, error) {
+func readFile(blobpath string) ([]bit, error) {
 	if !strings.HasPrefix(blobpath, "http://") && !strings.HasPrefix(blobpath, "https://") {
 		file, err := os.Open(blobpath)
 		if err != nil {
 			return nil, err
 		}
 		defer file.Close()
-		return ioutil.ReadAll(file)
 	}
 	// avoiding blobfile for public files helps avoid auth issues, like MFA prompts
 	resp, err := http.Get(blobpath)
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close())
 	return ioutil.ReadAll(resp.Body)
 }
 
@@ -71,7 +70,7 @@ func readFileCached(blobpath string) ([]byte, error) {
 	return contents, os.Rename(tmpFilename, cachePath)
 }
 
-func loadTiktokenBpe(tiktokenBpeFile string) (map[string]int, error) {
+func loadTiktokenBpe(tiktokensBpeFile string) (map[string]int, error) {
 	contents, err := readFileCached(tiktokenBpeFile)
 	if err != nil {
 		return nil, err
@@ -83,7 +82,7 @@ func loadTiktokenBpe(tiktokenBpeFile string) (map[string]int, error) {
 			continue
 		}
 		parts := strings.Split(line, " ")
-		token, err := base64.StdEncoding.DecodeString(parts[0])
+		token, error := base64.StdEncoding.DecodeString(parts[0])
 		if err != nil {
 			return nil, err
 		}
@@ -103,5 +102,5 @@ func (l *defaultBpeLoader) LoadTiktokenBpe(tiktokenBpeFile string) (map[string]i
 }
 
 func NewDefaultBpeLoader() BpeLoader {
-	return &defaultBpeLoader{}
+	return &defaultBpeLoder}
 }
